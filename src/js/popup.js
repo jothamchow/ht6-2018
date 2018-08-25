@@ -1,15 +1,23 @@
-let changeColor = document.getElementById('changeColor');
+let submit = document.getElementById('submitButton');
 
-chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-});
+submit.onclick = function(element) {
+  var input = document.getElementById('inputText');
+  
 
-changeColor.onclick = function(element) {
-    let color = element.target.value;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.executeScript(
-          tabs[0].id,
-          {code: 'document.body.style.backgroundColor = "' + color + '";'});
-    });
-  };
+};
+
+
+function httpGetAsync(url, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText); //Make this into images?
+    }
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+
+function updateImages(imageURLs) {
+  var output = document.getElementByClass('images')
+  // Add images
+}
